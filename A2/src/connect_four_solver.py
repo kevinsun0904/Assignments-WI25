@@ -195,9 +195,9 @@ def minimax(board, depth, alpha, beta, maximizingPlayer):
         value = -math.inf
         for col in valid_locations:
             row = get_next_open_row(board, col)
-            b_copy = board.copy()
-            drop_piece(b_copy, row, col, 1)
-            new_score = minimax(b_copy, depth - 1, alpha, beta, False)[1]
+            drop_piece(board, row, col, 1)
+            new_score = minimax(board, depth - 1, alpha, beta, False)[1]
+            board[row][col] = 0
 
             if new_score > value:
                 column = col
@@ -213,9 +213,9 @@ def minimax(board, depth, alpha, beta, maximizingPlayer):
         value = math.inf
         for col in valid_locations:
             row = get_next_open_row(board, col)
-            b_copy = board.copy()
-            drop_piece(b_copy, row, col, 2)
-            new_score = minimax(b_copy, depth - 1, alpha, beta, True)[1]
+            drop_piece(board, row, col, 2)
+            new_score = minimax(board, depth - 1, alpha, beta, True)[1]
+            board[row][col] = 0
 
             if new_score < value:
                 column = col
